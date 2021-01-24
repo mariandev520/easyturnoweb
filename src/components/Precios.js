@@ -7,22 +7,22 @@ const Precios = () => {
 	<div className=" bg-purple-700">
 		
 		<h1
-			className="text-center text-4xl text-white font-bold leading-snug" id="section3"
+			className="text-center text-4xl text-white font-bold leading-snug" id="section3" data-aos="fade-right"
 			>
 			Precio
 		</h1>
 		<div
-			class="h-1 mx-auto  w-24 mt-3 mb-6 rounded"
+			class="h-1 mx-auto bg-white w-24 mt-3 mb-6 rounded" data-aos="fade-left"
 		></div>
-		<p className="text-center text-lg text-white mt-2 px-6">
+		<p className="text-center text-lg text-white mt-2 px-6" data-aos="fade-right">
 			Elegí el plan que mejor se adapte a tu negocio.
 		</p>
 
 
-		<div class="container mx-auto flex justify-center mt-10 ">
+		<div class="container mx-auto flex justify-center mt-10 " >
 
 		<div
-				className=" bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden mx-4 "
+				className=" bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden mx-4 "data-aos="fade-left"
 			>
 				<div
 					className="block text-left text-sm sm:text-md max-w-sm mx-auto mt-2 text-gray-700 px-8 lg:px-6"
@@ -35,7 +35,6 @@ const Precios = () => {
 					<h2 className="text-3xl text-purple-700 text-center font-bold pb-6">USD 17/mes</h2>
 					Máxima funcionalidad en administración y gestión de Turnos.
 				</div>
-
 
 				<div className="flex flex-wrap mt-3 px-6">
 					<ul>
@@ -63,31 +62,6 @@ const Precios = () => {
 								</svg>
 							</div>
 							<span className="text-gray-700 text-lg ml-3">Servicio Tecnico 24/7</span>
-						</li>
-						<li className="flex items-center">
-							<div
-								className=" rounded-full p-2 fill-current text-green-500"
-								>
-								<svg
-									className="w-6 h-6 align-middle"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									>
-									<path
-										d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
-									></path>
-									<polyline
-									points="22 4 12 14.01 9 11.01"
-									></polyline>
-								</svg>
-							</div>
-							<span className="text-gray-700 text-lg ml-3">Hasta 2 Calendarios Activos</span>
 						</li>
 						<li className="flex items-center">
 							<div
@@ -198,13 +172,13 @@ const Precios = () => {
 						bg-blue-600 w-full text-white rounded-lg 
 						px-6 py-3 block shadow-xl hover:bg-blue-500"
 					>
-						<a href="https://www.mercadopago.com/mla/debits/new?preapproval_plan_id=2c9380847726c5c8017727fadf80011d" >Elegir</a>
+					Elegir
 					</button>
 				</div>
 			</div>
 
 			<div
-				className=" bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden mx-4"
+				className=" bg-white text-black rounded-lg shadow-inner shadow-lg overflow-hidden mx-4" data-aos="fade-right"
 			>
 				<div
 					className="block text-left text-sm sm:text-md max-w-sm mx-auto mt-2 text-gray-700 px-8 lg:px-6"
@@ -269,34 +243,6 @@ const Precios = () => {
 								</svg>
 							</div>
 							<span className="text-gray-700 text-lg ml-3">Botón de Whatsapp</span>
-							
-						</li>
-					
-
-						<li className="flex items-center">
-							<div
-								className=" rounded-full p-2 fill-current text-green-500"
-								>
-								<svg
-									className="w-6 h-6 align-middle"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									>
-									<path
-										d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
-									></path>
-									<polyline
-									points="22 4 12 14.01 9 11.01"
-									></polyline>
-								</svg>
-							</div>
-							<span className="text-gray-700 text-lg ml-3">Hasta 6 Calendarios Activos</span>
 						</li>
 						<li className="flex items-center">
 							<div
@@ -430,9 +376,8 @@ const Precios = () => {
 						className="mt-3 text-lg font-semibold 
 						bg-blue-600 w-full text-white rounded-lg 
 						px-6 py-3 block  hover:bg-blue-500"
-						
 					>
-					<a  >Elegir</a>
+					Elegir
 					</button>
 				</div>
 			</div>
@@ -445,9 +390,6 @@ const Precios = () => {
             >
               <path fill-opacity="1" d="M0,224L1440,32L1440,320L0,320Z"></path>
             </svg>
-
-
-
 	</div>
 	 
 	 );
