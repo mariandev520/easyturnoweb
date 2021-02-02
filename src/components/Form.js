@@ -1,35 +1,17 @@
-import React,{useState} from 'react';
+import React from 'react';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
 
+
 const Form = () => {
-    /*
+    
 
-    const [form, actualizarform] = useState({
-
-        user_mail: '',
-        user_name:'',
-        message:''
-      
-
-    });
-
-    const { user_mail,user_name,message} = contactos;
-
-    if(user_mail.trim() === ''|| user_name.trim() === '' ||  message.trim() === '' ) {
-
-        swal.Toast.fire({
-            icon: 'error',
-            title: 'Por favor complete todos los datos' 
-          }) ;
-        return;
-       
-        
-
-    }
-   */
+  
+    
+   
     function sendEmail(e) {
         e.preventDefault();
+        
     
         emailjs.sendForm('service_igde7xi', 'template_test', e.target,'user_DjxbpiGhrI5bsn5NN7Lm7')
           .then((result) => {
@@ -57,15 +39,13 @@ const Form = () => {
           e.target.reset();
 }
 
-
- 
-
-    
+// { !chekar ? <span className="errorMessage">"Completar Todos los campos"</span>:null }
 
     
     return ( 
 
      <form onSubmit={sendEmail}>
+         
         <div     className="bg-gray-200 pb-32"  >
             <h1
                 className="text-center text-4xl text-gray-700 font-bold leading-snug" id="section5" data-aos="fade-left"
@@ -81,11 +61,14 @@ const Form = () => {
             <div class="grid grid-cols-2 gap-4 max-w-xl m-auto">
 
                 <div class="col-span-2 lg:col-span-1">
-                <input type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full rounded-lg" name="user_name" placeholder="Nombre"/>
+                <input  type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full rounded-lg required " name="user_name"  placeholder="Nombre"  />
+               
+           
+            
                 </div>
 
                 <div class="col-span-2 lg:col-span-1 rounded-lg">
-                <input type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full rounded-lg" name="user_email" placeholder="Email"/>
+                <input type="text" class="border-solid border-gray-400 border-2 p-3 md:text-xl w-full rounded-lg required" name="user_email" placeholder="Email"/>
                 </div>
 
                 <div class="col-span-2">
@@ -93,7 +76,7 @@ const Form = () => {
                 </div>
 
                 <div class="col-span-2 text-right">
-                <button   type="submit" value="Send"  class="py-3 px-6 bg-blue-500 text-white font-bold w-full sm:w-32 rounded-md">
+                <button  type="submit" value="Send"  class="py-3 px-6 bg-blue-500 text-white font-bold w-full sm:w-32 rounded-md">
                     Enviar
                 </button>
                 </div>
@@ -106,7 +89,7 @@ const Form = () => {
      );
 }
 
-
+ 
 
 
  
