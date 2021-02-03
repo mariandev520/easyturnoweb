@@ -49,7 +49,42 @@ class Form1 extends Component {
   }
 
   handleSubmit = e => {
+
+   
     e.preventDefault();
+
+  
+
+  
+    emailjs.sendForm('service_igde7xi', 'template_test', e.target,'user_DjxbpiGhrI5bsn5NN7Lm7')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
+  
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+
+    Toast.fire({
+     
+      icon: 'success',
+      title: 'Gracias!! En breve responderemos' 
+    })
+    e.target.reset();
+  
+  
+
 
     if (formValid(this.state)) {
       console.log(`
@@ -59,13 +94,18 @@ class Form1 extends Component {
         Mensaje: ${this.state.message}
       
       `);
+
+      
+
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
+     
   };
 
   handleChange = e => {
     e.preventDefault();
+
     const { name, value } = e.target;
     let formErrors = { ...this.state.formErrors };
 
@@ -96,47 +136,13 @@ class Form1 extends Component {
   render() {
     const { formErrors } = this.state;
 
-    function sendEmail(e) {
-    
-      
-      e.preventDefault();
-       
-      
-  
-      emailjs.sendForm('service_igde7xi', 'template_test', e.target,'user_DjxbpiGhrI5bsn5NN7Lm7')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
-      
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-        
-    
-        Toast.fire({
-         
-          icon: 'success',
-          title: 'Gracias!! En breve responderemos' 
-        })
-        e.target.reset();
-}
-
+   
         
 
 
     return (
     
-      <form  onSubmit={sendEmail}>
+      <form  onSubmit={this.handleSubmit}>
         
       <div     className="bg-gray-200 pb-32"  >
       <h1
