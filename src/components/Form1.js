@@ -1,143 +1,105 @@
-import React, { Component } from "react";
-
-
-import emailjs from 'emailjs-com';
+import React from 'react';
+import * as emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
-import "../App.css";
 
 
 
-const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
-
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
-
-  // validate form errors being empty
-  Object.values(formErrors).forEach(val => {
-    val.length > 0 && (valid = false);
-  });
-
-  // validate the form was filled out
-  Object.values(rest).forEach(val => {
-    val === null && (valid = false);
-  });
-
-  return valid;
-};
-
-
- 
-
-class Form1 extends Component {
+class Form1 extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.state = {
-      firstName: null,
-      email: null,
-      message: null,
-    
-      formErrors: {
-        firstName: "",
-        email: "",
-        message: "",
-     
-      }
+      name: '',
+      email: '',
+      message: ''
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit = e => {
+  handleSubmit(event) {
+    event.preventDefault();
 
+    const { name, email,  message } = this.state;
+
+    if(name==='' ) { 
+
+        const errore = (true);
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+        Toast.fire({
    
-    e.preventDefault();
-
-  
-
-  
-    emailjs.sendForm('service_igde7xi', 'template_test', e.target,'user_DjxbpiGhrI5bsn5NN7Lm7')
-    .then((result) => {
-        console.log(result.text);
-    }, (error) => {
-        console.log(error.text);
-    });
-  
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-    
-
-    Toast.fire({
-     
-      icon: 'success',
-      title: 'Gracias!! En breve responderemos' 
-    })
-    e.target.reset();
-  
-  
-
-
-    if (formValid(this.state)) {
-      console.log(`
-        --SUBMITTING--
-        Su Nombre: ${this.state.firstName}
-        Email: ${this.state.email}
-        Mensaje: ${this.state.message}
-      
-      `);
-
-      
+            icon: 'error',
+            title: 'complete todos los campos' 
+          })
 
     } else {
-      console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+
+    const templateParams = {
+      from_name: name,
+      from_email: email,
+      to_name: '/*YOUR NAME OR COMPANY*/',
+      message_html: message,
+    };
+
+    
+
+    emailjs.sendForm('service_igde7xi', 'template_test', event.target,'user_DjxbpiGhrI5bsn5NN7Lm7')
+    this.resetForm();
+  ;
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-     
-  };
+  })
+  
 
-  handleChange = e => {
-    e.preventDefault();
-
-    const { name, value } = e.target;
-    let formErrors = { ...this.state.formErrors };
-
-    switch (name) {
-      case "firstName":
-        formErrors.firstName =
-          value.length < 3 ? "necesita como minimo 3 caracteres" : "";
-        break;
-
-      case "email":
-        
-        formErrors.email = emailRegex.test(value)
-        ? ""
-        : "correo electronico no valido";
-        break;
-
-      case "message":
-        formErrors.message =
-          value.length < 10 ?  "necesitan como minimo 6 carateres" : "";
-        break;
-      default:
-        break;
+  Toast.fire({
+   
+    icon: 'success',
+    title: 'Gracias!! En breve responderemos' 
+  })
+    
     }
+  }
+  resetForm() {
+    this.setState({
+      name: '',
+      email: '',
+      message: '',
+    });
+  
+   
+  }
 
-    this.setState({ formErrors, [name]: value }, () => console.log(this.state));
-  };
+
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
 
   render() {
-    const { formErrors } = this.state;
-
-   
-        
+    const { name, email,  message } = this.state;
 
 
     return (
@@ -162,13 +124,12 @@ class Form1 extends Component {
            
                 placeholder="First Name"
                 type="text"
-                name="firstName"
+                name="name"
+                value={name}
                 noValidate
                 onChange={this.handleChange}
               />
-              {formErrors.firstName.length > 0 && (
-                <span class="text-red-500 text-s italic sm:mb-2 -mx-2" >{formErrors.firstName}</span>
-              )}
+             
             </div>
             <div >
             <div class="col-span-2 lg:col-span-1 rounded-lg">
@@ -178,12 +139,11 @@ class Form1 extends Component {
                 placeholder="Email"
                 type="email"
                 name="email"
+                value={email}
                 noValidate
                 onChange={this.handleChange}
               />
-              {formErrors.email.length > 0 && (
-                <span  class="text-red-500 text-s italic" >{formErrors.email}</span>
-              )}
+             
               </div>
            </div>
             <div >
@@ -198,12 +158,11 @@ class Form1 extends Component {
                 placeholder="Mensaje"
                 type="message"
                 name="mesagge"
+                value={message}
                 noValidate
                 onChange={this.handleChange}
               ></textarea>
-              {formErrors.message.length > 0 && (
-                <span class="text-red-500 text-s italic" >{formErrors.message}</span>
-              )}
+            
               </div>
               </div>
             </div>
