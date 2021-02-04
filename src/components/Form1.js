@@ -23,7 +23,7 @@ class Form1 extends React.PureComponent {
 
     const { name, email,  message } = this.state;
 
-    if(name==='' ) { 
+    if(name==='' || email==='' || message ===''  ) { 
 
         const errore = (true);
 
@@ -85,7 +85,7 @@ class Form1 extends React.PureComponent {
     this.setState({
       name: '',
       email: '',
-      message: '',
+      message: ''
     });
   
    
@@ -99,7 +99,7 @@ class Form1 extends React.PureComponent {
 
 
   render() {
-    const { name, email,  message } = this.state;
+    const { name, email,message } = this.state;
 
 
     return (
@@ -129,7 +129,7 @@ class Form1 extends React.PureComponent {
                 noValidate
                 onChange={this.handleChange}
               />
-             
+            
             </div>
             <div >
             <div class="col-span-2 lg:col-span-1 rounded-lg">
@@ -146,7 +146,7 @@ class Form1 extends React.PureComponent {
              
               </div>
            </div>
-            <div >
+        
               
             
              
@@ -157,14 +157,14 @@ class Form1 extends React.PureComponent {
 
                 placeholder="Mensaje"
                 type="message"
-                name="mesagge"
+                name="message"
                 value={message}
                 noValidate
                 onChange={this.handleChange}
               ></textarea>
             
               </div>
-              </div>
+             
             </div>
             <div class="col-span-2 text-right">
             <button  type="submit" class="py-3 px-6 bg-blue-500 text-white font-bold w-full sm:w-32 rounded-md" >Enviar</button>
